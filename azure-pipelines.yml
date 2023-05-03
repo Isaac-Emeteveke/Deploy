@@ -31,11 +31,11 @@ stages:
         tags: |
           $(tag)
           latest
-- task: PublishPipelineArtifact@1
-  inputs:
-    targetPath: '$(Pipeline.Workspace)/s/kubernetes'
-    artifact: 'manifests'
-    publishLocation: 'pipeline'
+    - task: PublishPipelineArtifact@1
+      inputs:
+        targetPath: '$(Pipeline.Workspace)/s/kubernetes'
+        artifact: 'manifests'
+        publishLocation: 'pipeline'
 - stage: Deploy
   displayName: Deploy to Dev
   dependsOn: Build
@@ -43,7 +43,7 @@ stages:
     acrsecret: k8sexamplesacrauth
   jobs:
     - job: Deploy
-      displayname: Deploy to AKS
+      displayName: Deploy to AKS
       pool:
          vmImage: ubuntu-latest
       steps:
